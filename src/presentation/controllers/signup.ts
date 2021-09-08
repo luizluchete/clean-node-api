@@ -18,6 +18,7 @@ export class SignUpController implements Controller {
     if (!isValid) {
       return badRequest(new InvalidParamError('email'))
     }
+
     return {
       statusCode: 400,
       body: undefined
