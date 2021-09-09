@@ -1,6 +1,4 @@
-import { AccountModel } from '../../../domain/models/account'
-import { CreateAccount, CreateAccountDTO } from '../../../domain/usecases/create-account'
-import { Encrypter } from '../../protocols/encrypter'
+import { AccountModel, CreateAccount, CreateAccountDTO, Encrypter } from './db-create-account.protocols'
 
 export class DbCreateAccount implements CreateAccount {
   constructor (private readonly encrypter: Encrypter) {}
