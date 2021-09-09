@@ -164,7 +164,7 @@ describe('SignUp Controller', () => {
     expect(httpResponse.body).toEqual(new ServerError())
   })
 
-  test('Should call AddAccount with correct values', () => {
+  test('Should call CreateAccount with correct values', () => {
     const { sut, createAccountStub } = makeSut()
     const addSpy = jest.spyOn(createAccountStub, 'create')
     const httpRequest = {
@@ -182,5 +182,25 @@ describe('SignUp Controller', () => {
       name: 'any_name',
       password: 'any_password'
     })
+  })
+
+  test('Should return 500 if CreateAccount throws', () => {
+    const { sut, createAccountStub } = makeSut()
+    jest.spyOn(createAccountStub, 'create').mockImplementationOnce(() => {
+      throw new Error()
+    })
+
+    const httpRequest = {
+      body: {
+        email: 'any_email@email.com',
+        name: 'any name',
+        password: 'any_password',
+        passwordConfirmation: 'any_password'
+
+      }
+    }
+    const httpResponse = sut.handle(httpRequest)
+    expect(httpResponse.statusCode).toBe(500)
+    expect(httpResponse.body).toEqual(new ServerError())
   })
 })
