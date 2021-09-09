@@ -7,15 +7,9 @@ export class DbCreateAccount implements CreateAccount {
 
   async create (createAccount: CreateAccountDTO): Promise<AccountModel> {
     const hashedPassword = await this.encrypter.encrypt(createAccount.password)
-    await this.createAccountRepository.create(Object.assign({}, createAccount, {
+    const account = await this.createAccountRepository.create(Object.assign({}, createAccount, {
       password: hashedPassword
     }))
-
-    return await new Promise(resolve => resolve({
-      email: '',
-      id: '',
-      password: '',
-      name: ''
-    }))
+    return account
   }
 }
