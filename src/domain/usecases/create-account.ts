@@ -7,5 +7,5 @@ export interface CreateAccountDTO {
 }
 
 export interface CreateAccount {
-  create: (account: CreateAccountDTO) => AccountModel
+  create: (account: CreateAccountDTO) => Promise<AccountModel>
 }
