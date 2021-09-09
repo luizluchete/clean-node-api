@@ -84,4 +84,17 @@ describe('DbCreateAccount UseCase', () => {
       }
     )
   })
+  test('Should throw if CreateAccountRepository throws', async () => {
+    const { sut, createAccountRepositoryStub } = makeSut()
+    jest.spyOn(createAccountRepositoryStub, 'create').mockReturnValueOnce(new Promise((resolve, reject) => {
+      throw new Error()
+    }))
+    const accountData = {
+      name: 'valid_name',
+      email: 'valid_email@email.com',
+      password: 'valid_password'
+    }
+    const promise = sut.create(accountData)
+    await expect(promise).rejects.toThrow()
+  })
 })
