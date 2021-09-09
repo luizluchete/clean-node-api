@@ -3,9 +3,18 @@ module.exports = {
     '<rootDir>/src'
   ],
   // collectCoverage: true,
-  collectCoverageFrom: ['<rootDir>/src/**/*.ts'],
+  // collectCoverageFrom: [
+  //   '<rootDir>/src/**/*.ts',
+  //   '!<rootDir>/src/**/*-protocols.ts'
+  // ],
+  collectCoverageFrom: [
+    '<rootDir>/src/**/*.ts',
+    '!<rootDir>/src/main/**',
+    '!<rootDir>/src/**/*-protocols.ts',
+    '!**/protocols/**',
+    '!**/test/**'],
   coverageDirectory: 'coverage',
-  coverageProvider: 'v8',
+  coverageProvider: 'babel',
   transform: {
     '.*\\.ts$': 'ts-jest'
   }
