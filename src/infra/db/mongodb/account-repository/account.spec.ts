@@ -11,11 +11,11 @@ describe('Account Mongo Repository', () => {
   })
 
   const makeSut = (): AccountMongoRepository => {
-
+    return new AccountMongoRepository()
   }
 
   test('Should return an account on sucess', async () => {
-    const sut = new AccountMongoRepository()
+    const sut = makeSut()
     const account = await sut.create({
       name: 'any_name',
       email: 'any_email@email.com',
