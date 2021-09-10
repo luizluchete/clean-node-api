@@ -1,6 +1,6 @@
 
 import { DbCreateAccount } from './db-create-account'
-import { AccountModel, CreateAccountDTO, Encrypter, CreateAccountRepository } from './db-create-account.protocols'
+import { AccountModel, CreateAccountDTO, Encrypter, CreateAccountRepository } from './db-create-account-protocols'
 
 const makeEncrypter = (): Encrypter => {
   class EncrypterStub implements Encrypter {

@@ -1,4 +1,4 @@
-import { AccountModel, CreateAccount, CreateAccountDTO, CreateAccountRepository, Encrypter } from './db-create-account.protocols'
+import { AccountModel, CreateAccount, CreateAccountDTO, CreateAccountRepository, Encrypter } from './db-create-account-protocols'
 
 export class DbCreateAccount implements CreateAccount {
   constructor (
