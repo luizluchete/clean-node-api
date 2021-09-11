@@ -1,6 +1,6 @@
 import { Collection, MongoClient } from 'mongodb'
 export const MongoHelper = {
-  client: (null as unknown) as MongoClient,
+  client: null as MongoClient,
   url: (null as unknown) as string,
   async connect (url: string): Promise<void> {
     this.url = url
