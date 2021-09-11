@@ -13,21 +13,33 @@ const makeValidation = (): Validation => {
 
 interface SubTypes {
   sut: ValidationComposite
-  validationStub: Validation
+  validationStubs: Validation[]
 }
 
 const makeSut = (): SubTypes => {
-  const validationStub = makeValidation()
-  const sut = new ValidationComposite([validationStub])
-  return { sut, validationStub }
+  const validationStubs = [
+    makeValidation(),
+    makeValidation()
+  ]
+  const sut = new ValidationComposite(validationStubs)
+  return { sut, validationStubs }
 }
 
 describe('Validation Composite', () => {
   test('Should return an error if any validation fails', () => {
-    const { sut, validationStub } = makeSut()
-    jest.spyOn(validationStub, 'validate').mockReturnValueOnce(new MissingParamError('field'))
+    const { sut, validationStubs } = makeSut()
+    jest.spyOn(validationStubs[1], 'validate').mockReturnValueOnce(new MissingParamError('field'))
     const error = sut.validate({ field: 'any_value' })
 
     expect(error).toEqual(new MissingParamError('field'))
+  })
+
+  test('Should return the first error if more then one validation fails', () => {
+    const { sut, validationStubs } = makeSut()
+    jest.spyOn(validationStubs[0], 'validate').mockReturnValueOnce(new Error())
+    jest.spyOn(validationStubs[1], 'validate').mockReturnValueOnce(new MissingParamError('field'))
+    const error = sut.validate({ field: 'any_value' })
+
+    expect(error).toEqual(new Error())
   })
 })
