@@ -61,9 +61,7 @@ describe('DbCreateAccount UseCase', () => {
 
   test('Should throw if Hasher throws', async () => {
     const { hasherStub, sut } = makeSut()
-    jest.spyOn(hasherStub, 'hash').mockReturnValueOnce(new Promise((resolve, reject) => {
-      throw new Error()
-    }))
+    jest.spyOn(hasherStub, 'hash').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
     const promise = sut.create(makeFakeAccountData())
     await expect(promise).rejects.toThrow()
   })
@@ -82,9 +80,7 @@ describe('DbCreateAccount UseCase', () => {
   })
   test('Should throw if CreateAccountRepository throws', async () => {
     const { sut, createAccountRepositoryStub } = makeSut()
-    jest.spyOn(createAccountRepositoryStub, 'create').mockReturnValueOnce(new Promise((resolve, reject) => {
-      throw new Error()
-    }))
+    jest.spyOn(createAccountRepositoryStub, 'create').mockReturnValueOnce(new Promise((resolve, reject) => reject(new Error())))
 
     const promise = sut.create(makeFakeAccountData())
     await expect(promise).rejects.toThrow()
