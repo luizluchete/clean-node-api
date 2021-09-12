@@ -2,6 +2,6 @@
 **Coverage 100%**
 
 ### feactures ###
-*[x] - Create Account*
-*[\] - Authenticate*
-*[] - create survey*
+[x] - Create Account <br>
+[x] - Authenticate <br>
+[] - create survey
